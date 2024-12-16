@@ -23,7 +23,7 @@ docker-compose up --build -d
 Работа с миграциями осуществляется с помощью migrate [https://github.com/golang-migrate/migrate](https://github.com/golang-migrate/migrate) примеры команд:
 
 ```bash
-make migrate-create <name>
+make migration <name>
 make migrate-up
 make migrate-down
 ```
@@ -45,5 +45,7 @@ curl -X GET http://localhost:8080/api/auth/tokens?user_id=<user_id>
 ```
 
 Для защиты маршрута на /refresh эндпоинт используется middleware, который проверяет наличие access token в заголовке Authorization, если токен не валидный или не предоставлен, то возвращается ошибка 401 Unauthorized, так же если токен истек, то возвращается ошибка 401 Unauthorized.
+
+Сессии не дублируются, происходит замена токена на новый.
 
 Оповещение о смене IP реализовано моковым методом mockSendEmail, который выводит в консоль сообщение.
